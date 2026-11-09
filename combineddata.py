@@ -8,7 +8,7 @@ Created on Mon Nov  9 14:10:12 2026
 import pandas as pd
 from pathlib import Path
 
-# TASK 1: Combine monthly climate data (1960 – 2024)
+# TASK 1: Combine monthly climate data (1960–2024)
 
 # 1. Locate the data folder
 folder = Path(__file__).resolve().parent / "climateGrid"
