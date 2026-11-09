@@ -1,0 +1,18 @@
+# Python / Spyder / Jupyter
+__pycache__/
+*.py[cod]
+.spyproject/
+.ipynb_checkpoints/
+
+# Keep the full course climate grids and large generated datasets local
+climateGrid/
+data/raw/
+data/processed/
+*.parquet
+*.pkl
+*.pickle
+
+# Local secrets and environments
+.env
+.venv/
+venv/
