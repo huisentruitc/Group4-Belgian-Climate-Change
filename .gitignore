@@ -16,3 +16,11 @@ data/processed/
 .env
 .venv/
 venv/
+
+# Large climate data
+climateGrid/
+climateGrid.tar.gz
+
+# Redundant shapefile archive
+ne_10m_admin_1_states_provinces.zip
+gmst_berkeley_preindustrial.csv.xlsx
