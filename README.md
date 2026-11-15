@@ -1,5 +1,7 @@
 # Group 4 — Belgian Climate Change and Extreme Temperatures
 
+Protected Main Branch
+
 **Environmental Programming — Project 4**
 
 Research question: **Would these temperatures happen in a world without climate change?**
