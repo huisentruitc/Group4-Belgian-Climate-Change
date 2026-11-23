@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Nov  9 14:10:12 2026
+Created on Mon Nov  23 13:50:12 2026
 
 @author: calvi
 """
@@ -10,14 +10,23 @@ from pathlib import Path
 
 # TASK 1: Combine monthly climate data (1960–2024)
 
+# NOTE FOR CLASSMATES:
+# Put the unzipped "climateGrid" folder in the same folder as this script.
+# If you saved it somewhere else, uncomment the second "folder =" line below
+# and paste your own path.
+
 # 1. Locate the data folder
 folder = Path(__file__).resolve().parent / "climateGrid"
+# folder = Path(r"C:\Users\YourName\Downloads\climateGrid")
 
 if not folder.is_dir():
-    raise FileNotFoundError(f"Data folder not found: {folder}")
+    raise FileNotFoundError(
+        f"Data folder not found: {folder}. "
+        "Put the unzipped 'climateGrid' folder next to this script or set your own path above."
+    )
 
-# 2. Find the monthly CSV files
-files = sorted(folder.glob("climategrid_*.csv"))
+# 2. Find the monthly CSV files (rglob also checks subfolders)
+files = sorted(folder.rglob("climategrid_*.csv"))
 
 # 3. Select files from January 1960 to December 2024
 files = [
@@ -26,6 +35,9 @@ files = [
 ]
 
 print("Files selected:", len(files), flush=True)
+
+if not files:
+    raise FileNotFoundError(f"No 'climategrid_*.csv' files found in: {folder}")
 
 # Check that all expected months are present
 expected = {
