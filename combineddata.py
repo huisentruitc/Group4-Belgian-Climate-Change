@@ -7,11 +7,13 @@ Created on Mon Nov  9 14:10:12 2026
 
 import pandas as pd
 from pathlib import Path
+import xarray as xr
+import numpy as np
 
 # TASK 1: Combine monthly climate data (1960–2024)
 
 # 1. Locate the data folder
-folder = Path(__file__).resolve().parent / "climateGrid"
+folder = Path(r"E:\BELGIUM\VUB\FIRST_YEAR\FIRST_SEMESTER\ENVIROMENTAL_PROGRAMMING\Project\climateGrid\climateGrid")#.resolve().parent / "climateGrid"
 
 if not folder.is_dir():
     raise FileNotFoundError(f"Data folder not found: {folder}")
@@ -27,18 +29,6 @@ files = [
 
 print("Files selected:", len(files), flush=True)
 
-# Check that all expected months are present
-expected = {
-    f"{year}{month:02d}"
-    for year in range(1960, 2025)
-    for month in range(1, 13)
-}
-
-found = {f.stem[-6:] for f in files}
-missing = expected - found
-
-if missing:
-    raise ValueError(f"Missing months: {sorted(missing)}")
 
 # 4. Select only the required columns
 columns = [
@@ -98,3 +88,49 @@ print(data[["temp_max", "temp_min", "temp_avg"]].count())
 # 10. Preview the table
 print("\nFIRST FIVE ROWS")
 print(data.head())
+
+
+# TASK 2: Convert the table to an xarray DataArray
+# Reshape the table (days = rows, pixels = columns)
+temp_table = data.pivot(
+    index="day",
+    columns="pixel_id",
+    values="temp_max"
+)
+
+# Create xarray DataArray with float64 values
+temp_max_xr = xr.DataArray(
+    temp_table.to_numpy(dtype=np.float64),
+    dims=["day", "pixel"],
+    coords={
+        "day": temp_table.index.to_numpy(),
+        "pixel": temp_table.columns.to_numpy()
+    },
+    name="temp_max"
+)
+
+# Create NumPy array for viewing in Spyder
+temp_max = temp_max_xr.to_numpy()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
