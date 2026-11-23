@@ -98,3 +98,7 @@ print(data[["temp_max", "temp_min", "temp_avg"]].count())
 # 10. Preview the table
 print("\nFIRST FIVE ROWS")
 print(data.head())
+
+
+a = 2
+print(a)
